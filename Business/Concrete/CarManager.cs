@@ -15,69 +15,54 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public Car GetById(int id, bool access)
-        {
-            if (access)
-            {
-                return _carDal.GetById(id);
-            }
 
-            throw new Exception("Access not granted");
+        public Car GetById(int id)
+        {
+            return _carDal.Get(c=>c.Id == id);
         }
 
-        public List<Car> GetByBrandId(int brandId, bool access)
+        public List<Car> GetCarByBrandId(int brandId)
         {
-            if (access)
-            {
-                return _carDal.GetByBrandId(brandId);
-            }
-
-            throw new Exception("Access not granted");
-            
+            return _carDal.GetAll(c=>c.BrandId == brandId);
         }
 
-        public List<Car> GetAll(bool access)
+        public List<Car> GetCarByColorId(int colorId)
         {
-            if (access)
-            {
-                return _carDal.GetAll();
-            }
-
-            throw new Exception("Access not granted");
+            return _carDal.GetAll(c => c.ColorId == colorId);
         }
 
-        public void Add(Car car, bool access)
+
+        public List<Car> GetAll()
         {
-            if (access)
+            return _carDal.GetAll();
+
+        }
+
+        public void Add(Car car)
+        {
+            if (car.DailyPrice <= 0)
+            {
+                throw new Exception("Daily Price Should Be More Than 0");
+            }
+            if (car.Description.Length < 2)
+            {
+                throw new Exception("Car Description Should Be Longer Than Or Equal to 2");
+            }
+
+            if (car.Description.Length >= 2 && car.DailyPrice > 0)
             {
                 _carDal.Add(car);
-                return;
             }
-
-            throw new Exception("Access not granted");
         }
 
-        public void Update(Car car, bool access)
-        {
-            if (access)
-            {
-                _carDal.Update(car);
-                return;
-            }
-
-            throw new Exception("Access not granted");
-            
+        public void Update(Car car)
+        { 
+            _carDal.Update(car);
         }
 
-        public void Delete(Car car, bool access)
+        public void Delete(Car car)
         {
-            if (access)
-            {
-                _carDal.Delete(car);
-                return;
-            }
-
-            throw new Exception("Access not granted");
+            _carDal.Delete(car);
         }
     }
 }

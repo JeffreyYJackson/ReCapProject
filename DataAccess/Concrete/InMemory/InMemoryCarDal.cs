@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using DataAccess.Abstract;
 using Entities.Concrete;
 
@@ -22,19 +23,30 @@ namespace DataAccess.Concrete.InMemory
             };
         }
 
-        public Car GetById(int id)
-        {
-            return _cars.SingleOrDefault(c=>c.Id == id);
-        }
 
-        public List<Car> GetByBrandId(int brandId)
-        {
-            return _cars.Where(p => p.BrandId == brandId).ToList();
-        }
 
-        public List<Car> GetAll()
+
+
+
+        List<Car> GetAll()
         {
             return _cars;
+        }
+
+        Car GetById(int id)
+        {
+            return _cars.SingleOrDefault(c => c.Id == id);
+        }
+        
+
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
         }
 
         public void Add(Car car)

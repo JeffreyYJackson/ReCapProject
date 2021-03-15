@@ -5,11 +5,12 @@ namespace Business.Abstract
 {
     public interface ICarService
     {
-        Car GetById(int id, bool access);
-        List<Car> GetByBrandId(int brandId, bool access);
-        List<Car> GetAll(bool access);
-        void Add(Car car, bool access);
-        void Update(Car car, bool access);
-        void Delete(Car car, bool access);
+        Car GetById(int id);
+        List<Car> GetCarByBrandId(int brandId);
+        List<Car> GetCarByColorId(int colorId);
+        List<Car> GetAll();
+        void Add(Car car);
+        void Update(Car car);
+        void Delete(Car car);
     }
 }
