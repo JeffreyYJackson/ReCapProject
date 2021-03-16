@@ -44,9 +44,9 @@ namespace Business.Concrete
             {
                 throw new Exception("Daily Price Should Be More Than 0");
             }
-            if (car.Description.Length < 2)
+            if (car.Name.Length < 2)
             {
-                throw new Exception("Car Description Should Be Longer Than Or Equal to 2");
+                throw new Exception("Car Name Should Be Longer Than Or Equal to 2");
             }
 
             if (car.Description.Length >= 2 && car.DailyPrice > 0)
