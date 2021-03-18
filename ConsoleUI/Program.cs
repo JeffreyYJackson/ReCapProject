@@ -1,8 +1,6 @@
 ﻿using System;
 using Business.Concrete;
-using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 
 namespace ConsoleUI
@@ -11,17 +9,46 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new EfCarDal());
-            
-            carManager.Add(new Car(){Id = 1, BrandId = 1, ColorId = 2, DailyPrice = 100.50, ModelYear = 2008, Name = "Sorento", Description = "200.000 Kilometers"});
-            carManager.Add(new Car(){Id = 2, BrandId = 1, ColorId = 1, DailyPrice = 150.50, ModelYear = 2011, Name = "Sorento", Description = "100.000 Kilometers"});
-            
-            // carManager.Delete(carManager.GetById(1));
-            // carManager.Delete(carManager.GetById(2));
+            CarManagerTest();
 
-            foreach (var car in carManager.GetCarByColorId(2))
+            //BrandManagerTest();
+
+
+            //ColorManagerTest();
+            
+            
+            
+            
+            
+        }
+
+        private static void ColorManagerTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+
+            colorManager.Add(new Color() {ColorId = 1, ColorName = "Dark Gray"});
+            colorManager.Add(new Color() {ColorId = 2, ColorName = "Light Gray"});
+            colorManager.Add(new Color() {ColorId = 3, ColorName = "Black"});
+        }
+
+        private static void BrandManagerTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+
+            brandManager.Add(new Brand() {BrandId = 1, BrandName = "Kia"});
+        }
+
+        private static void CarManagerTest()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+
+            //carManager.Update(new Car(){Id = 3, BrandId = 1, ColorId = 3, ModelYear = 2011, DailyPrice = 150.50, Description = "150.000 Kilometers", Name = "Sorento"});
+            // carManager.Delete(carManager.GetById(1));
+            // carManager.Delete(carManager.GetByIColorManagerTd(2));
+
+            foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine(car.Name + " " + car.Description);
+                Console.WriteLine("{0} {1} {2} {3}", car.CarName, car.BrandName, car.ColorName, car.DailyPrice);
             }
         }
     }
