@@ -46,7 +46,7 @@ namespace ConsoleUI
             // carManager.Delete(carManager.GetById(1));
             // carManager.Delete(carManager.GetByIColorManagerTd(2));
 
-            foreach (var car in carManager.GetCarDetails())
+            foreach (var car in carManager.GetCarDetails().Data)
             {
                 Console.WriteLine("{0} {1} {2} {3}", car.CarName, car.BrandName, car.ColorName, car.DailyPrice);
             }
