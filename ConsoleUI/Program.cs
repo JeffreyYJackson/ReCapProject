@@ -9,17 +9,51 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManagerTest();
+            //CarManagerTest();
 
             //BrandManagerTest();
 
 
             //ColorManagerTest();
+
+            //UserManagerTest();
+
+            //CustomerManagerTest();
+
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            //Console.WriteLine(rentalManager.ReturnCar(2).Message);
             
-            
-            
-            
-            
+            //Console.WriteLine(rentalManager.Add(new Rental(){Id = 4, CustomerId = 1, CarId = 1, RentDate = DateTime.Now}).Message);
+            foreach (var rental in rentalManager.GetRentalDetails().Data)
+            {
+                Console.WriteLine("{0} {1} {2} {3} {4} ", rental.Id, rental.CustomerName, rental.CarName, rental.RentDate,rental.IsReturned);
+                //Console.WriteLine(rental.CarId);
+            }
+
+        }
+
+        private static void CustomerManagerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            customerManager.Add(new Customer() {Id = 1, UserId = 1, CompanyName = "Jacson Inc."});
+
+            foreach (var user in customerManager.GetCustomerDetails().Data)
+            {
+                Console.WriteLine("{0} {1} {2} ", user.Id, user.UserName, user.CompanyName);
+            }
+        }
+
+        private static void UserManagerTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+
+            //userManager.Add(new User(){Id = 1, FirstName = "Jeffrey", LastName = "Jackson", Email = "jeffrey.y.jackson@gmail.com", Password = "12345"});
+
+            foreach (var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine(user.FirstName);
+            }
         }
 
         private static void ColorManagerTest()

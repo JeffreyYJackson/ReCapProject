@@ -65,7 +65,7 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.Description = car.Description;
         }
 
-        public void Delete(Car car)
+        public void Remove(Car car)
         {
             Car carToDelete = _cars.SingleOrDefault(c=>c.Id == car.Id);
             _cars.Remove(carToDelete);
