@@ -11,7 +11,7 @@ namespace ConsoleUI
         {
             //CarManagerTest();
 
-            //BrandManagerTest();
+            BrandManagerTest();
 
 
             //ColorManagerTest();
@@ -21,16 +21,21 @@ namespace ConsoleUI
             //CustomerManagerTest();
 
 
+            //RentalManagerTest();
+        }
+
+        private static void RentalManagerTest()
+        {
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
             //Console.WriteLine(rentalManager.ReturnCar(2).Message);
-            
+
             //Console.WriteLine(rentalManager.Add(new Rental(){Id = 4, CustomerId = 1, CarId = 1, RentDate = DateTime.Now}).Message);
             foreach (var rental in rentalManager.GetRentalDetails().Data)
             {
-                Console.WriteLine("{0} {1} {2} {3} {4} ", rental.Id, rental.CustomerName, rental.CarName, rental.RentDate,rental.IsReturned);
+                Console.WriteLine("{0} {1} {2} {3} {4} ", rental.Id, rental.CustomerName, rental.CarName, rental.RentDate,
+                    rental.IsReturned);
                 //Console.WriteLine(rental.CarId);
             }
-
         }
 
         private static void CustomerManagerTest()
@@ -69,7 +74,10 @@ namespace ConsoleUI
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
 
-            brandManager.Add(new Brand() {BrandId = 1, BrandName = "Kia"});
+            foreach (var brand in brandManager.GetAll().Data)
+            {
+                Console.WriteLine(brand.BrandName);
+            }
         }
 
         private static void CarManagerTest()
